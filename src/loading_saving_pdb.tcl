@@ -4,22 +4,23 @@ puts "Attempting to load file: $filename"
 
 # Load the molecule
 set mol [mol load gro $filename]
+# Define the distance as a variable
+set distance 3
+# Find all residues within 3 Å of APT or COR, including APT and COR themselves
+set inRadiusResidues [atomselect top "within $distance of (resname APT or resname COR)"]
 
-# Find water residues within 3 Å of APT or COR
-set waterResidues [atomselect top "resname SOL and within 3 of (resname APT or resname COR)"]
-
-# Get the unique residue IDs for these water molecules
-set waterResIDs [$waterResidues get residue]
-set uniqueWaterResIDs [lsort -unique $waterResIDs]
+# Get the unique residue IDs for these molecules
+set resIDs [$inRadiusResidues get residue]
+set uniqueResIDs [lsort -unique $resIDs]
 
 # Now select all atoms that belong to these residues
-set completeWaterResidues [atomselect top "resname SOL and residue $uniqueWaterResIDs"]
+set completeInRadiusResidues [atomselect top "residue $uniqueResIDs"]
 
-# Write the selected water molecules to a PDB file
-$completeWaterResidues writegro "waters_near_apt_cor.gro"
+# Write the selected molecules to a GRO file
+$completeInRadiusResidues writegro "all_including_apt_cor_near_apt_cor.gro"
 
 # Cleanup
-$waterResidues delete
-$completeWaterResidues delete
+$inRadiusResidues delete
+$completeInRadiusResidues delete
 
 exit
