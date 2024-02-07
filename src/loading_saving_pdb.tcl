@@ -16,7 +16,7 @@ set uniqueWaterResIDs [lsort -unique $waterResIDs]
 set completeWaterResidues [atomselect top "resname SOL and residue $uniqueWaterResIDs"]
 
 # Write the selected water molecules to a PDB file
-$completeWaterResidues writepdb "waters_near_apt_cor.pdb"
+$completeWaterResidues writegro "waters_near_apt_cor.gro"
 
 # Cleanup
 $waterResidues delete
