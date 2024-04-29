@@ -71,7 +71,7 @@ proc visualize_np {} {
     # visualize_residues 1 "resname APT and not name N" 1.5
     visualize_residues 1 {resname APT and name "C.*" and not name N} 1.5
     mol modcolor 1 top "ColorID 2"
-    visualize_residues 2 {resname ODA and name "H.*" and not name N} 2.3
+    visualize_residues 2 {resname ODA and name "H.*" and not name N} 1.5
     mol modcolor 2 top "ColorID 8"
     # mol modcolor 1 top "ColorID 2"
     # Selecting the NH3 atoms of the aptes
@@ -121,9 +121,13 @@ proc visualize_na {} {
 
 proc visualize_apt {} {
     delete_all_reps
-    visualize_residues 0 "resname APT and not name N" 2.3
-    visualize_residues 1 "name N" 2.
-    mol modcolor 1 top "ColorID 0"
+    visualize_residues 0 {resname APT and not name N and name "C.*"} 2.3
+    mol modcolor 0 top "ColorID 2"
+    visualize_residues 1 {resname APT and not name N and name "H.*"} 2.3
+    mol modcolor 1 top "ColorID 8"
+    visualize_residues 2 "name N" 2.3
+    mol modcolor 2 top "ColorID 0"
+    visualize_residues 3 {resname APT and  name Si "OM.*"} 2.3
     reset_view_and_display
     rotate z by 0
     rotate y by 0
