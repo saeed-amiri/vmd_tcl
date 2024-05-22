@@ -71,7 +71,7 @@ proc visualize_np {} {
     # visualize_residues 1 "resname APT and not name N" 1.5
     visualize_residues 1 {resname APT and name "C.*" and not name N} 1.5
     mol modcolor 1 top "ColorID 2"
-    visualize_residues 2 {resname ODA and name "H.*" and not name N} 1.5
+    visualize_residues 2 {resname APT and name "H.*" and not name N} 1.5
     mol modcolor 2 top "ColorID 8"
     # mol modcolor 1 top "ColorID 2"
     # Selecting the NH3 atoms of the aptes
