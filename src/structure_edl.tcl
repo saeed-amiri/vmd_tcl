@@ -189,7 +189,7 @@ proc visualize_scoop {} {
     translate by 0 0 0
 
 }
-proc max_d10 {molid} {
+proc minmax_d10 {molid} {
   set sel [atomselect $molid "resname D10"]
   set coords [$sel get {x y z}]
   set coord [lvarpop coords]
@@ -200,9 +200,9 @@ proc max_d10 {molid} {
     if {$z < $minz} {set minz $z} else {if {$z > $maxz} {set maxz $z}}
   }
   $sel delete
-  return $minz
+  return [list $minz $maxz]
 }
-proc box_molecule {molid} {
+proc box_molecule {molid minz maxz color} {
     # get the min and max values for each of the directions
     set pbc [pbc get -molid $molid]
     puts "__________________________"
@@ -214,24 +214,19 @@ proc box_molecule {molid} {
 
     puts "__________________________"
     puts "a: $a, b: $b, c: $c"
+    puts "__________________________"
     # set the min and max values for each direction based on the PBC box
     set minx 0
     set maxx $a
     set miny 0
     set maxy $b
-    set minz 0
-    set max_d10_z [max_d10 $molid]
-    puts "Max coordinates of D10 residues: $max_d10_z"
 
-    puts "__________________________"
-
-    set maxz $max_d10_z
     puts "__________________________"
     puts "minx: $minx, maxx: $maxx, miny: $miny, maxy: $maxy, minz: $minz, maxz: $maxz"
     puts "__________________________"
 
     # draw the filled polygons
-    graphics top color red
+    graphics top color $color
     graphics top material Transparent
 
     # Bottom face
@@ -340,10 +335,17 @@ scale by 0.3003003
 translate by 0 -1 0
 pbc box
 pbc box -width 6 -color black
-# Example usage
-# draw_box 0 0 0 216.7 216.7 227
-box_molecule top
-# graphics top material Transparent
+
+set minmax_d10_z [minmax_d10 top]
+set minz [lindex $minmax_d10_z 0]
+set maxz [lindex $minmax_d10_z 1]
+puts "Min and Max Z coordinates of D10 residues: $minz, $maxz"
+pbc box -width 6 -color black
+box_molecule top 0 $minz red3
 render_image "structure_scoop_box.png"
+pbc box -width 6 -color black
+box_molecule top $minz $maxz yellow
+render_image "structure_scoop_double_box.png"
+
 
 exit
