@@ -331,12 +331,15 @@ load_molecule gro $structure
 visualize_scoop
 scale by 3.33
 render_image "structure_scoop.png"
-scale by 0.3003003
-pbc box
-pbc box -width 6 -color black
+
 graphics top sphere {107.2 109.7 114.7} radius 36 resolution 100
 graphics top material Transparent
+translate by 0 1 0
 render_image "structure_scoop_sphere.png"
+scale by 0.3003003
+translate by 0 -1 0
+pbc box
+pbc box -width 6 -color black
 # Example usage
 # draw_box 0 0 0 216.7 216.7 227
 box_molecule top
