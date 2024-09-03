@@ -253,7 +253,17 @@ proc box_molecule {molid minz maxz color} {
     graphics top triangle "$maxx $miny $minz" "$maxx $maxy $minz" "$maxx $maxy $maxz"
     graphics top triangle "$maxx $miny $minz" "$maxx $miny $maxz" "$maxx $maxy $maxz"
 }
+proc draw_boxes {molid minz intervals color} {
+    set index 0
 
+    foreach interval $intervals {
+        set start_z [expr $minz + $interval]
+        set end_z [expr $start_z + 3]
+        set color $color
+        box_molecule $molid $start_z $end_z $color
+        incr index
+    }
+}
 
 puts "__________________________"
 set structure [lindex $argv 0]
@@ -327,7 +337,17 @@ visualize_scoop
 scale by 3.33
 render_image "structure_scoop.png"
 
-graphics top sphere {107.2 109.7 114.7} radius 36 resolution 100
+
+set pbc [pbc get -molid top]
+set a [lindex $pbc 0 0]
+set b [lindex $pbc 0 1]
+set c [lindex $pbc 0 2]
+set com_x [expr {$a / 2.0}]
+set com_y [expr {$b / 2.0}]
+set com_z [expr {$c / 2.0}]
+puts "COM: $com_x $com_y $com_z"
+
+graphics top sphere [list $com_x $com_y $com_z] radius 36 resolution 100
 graphics top material Transparent
 translate by 0 1 0
 render_image "structure_scoop_sphere.png"
@@ -346,6 +366,17 @@ render_image "structure_scoop_box.png"
 pbc box -width 6 -color black
 box_molecule top $minz $maxz yellow
 render_image "structure_scoop_double_box.png"
+
+graphics top delete all
+graphics top sphere [list $com_x $com_y $com_z] radius 36 resolution 100
+graphics top material Transparent
+
+draw_boxes top $minz  [list -3 -8 -13 -18 -23 -28 -33 -38 -43 -48 -53] red3
+draw_boxes top $minz  [list 2 7 12 15]  yellow
+
+
+# graphics top material plastic
+render_image "structure_scoop_layers.png"
 
 
 exit
