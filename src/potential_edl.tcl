@@ -64,6 +64,6 @@ for {set i 0} {$i < [llength $isosurface_values]} {incr i} {
 }
 
 # Increase rendering quality using TachyonInternal
-render TachyonInternal "potential_15da.tga" -res 1920 1080 -aasamples 24 -raydepth 8
-
+# render TachyonInternal "potential_15da.tga" %s -res 1920 1080 -aasamples 24 -raydepth 8
+render Tachyon potential.dat "/home/applications/software/vmd/vmd-1.9.4/tachyon_LINUXAMD64" -aasamples 12 %s -format TARGA -o %s.tga
 exit
