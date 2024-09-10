@@ -134,6 +134,20 @@ proc visualize_apt {} {
     rotate x by 20
 }
 
+proc visualize_aminopropyl {} {
+    delete_all_reps
+    visualize_residues 0 {resname APT and not name N and name "C.*"} 2.3
+    mol modcolor 0 top "ColorID 2"
+    visualize_residues 1 {resname APT and not name N and name "H.*"} 2.3
+    mol modcolor 1 top "ColorID 8"
+    visualize_residues 2 "name N" 2.3
+    mol modcolor 2 top "ColorID 0"
+    reset_view_and_display
+    rotate z by 0
+    rotate y by 0
+    rotate x by 20
+}
+
 proc visualize_oda {} {
     delete_all_reps
     visualize_residues 0 {resname ODA and name "C.*"} 2.3
@@ -222,5 +236,10 @@ load_molecule pdb "ODAp.pdb"
 delete_all_reps
 visualize_oda
 render_image "oda.png"
+
+load_molecule pdb "aminopropyl.pdb"
+delete_all_reps
+visualize_aminopropyl
+render_image "aminopropyl.png"
 
 exit
