@@ -146,6 +146,7 @@ proc visualize_oda {} {
     rotate x by 20
 }
 
+puts "__________________________"
 set structure [lindex $argv 0]
 puts "Structure: $structure"
 
@@ -154,8 +155,10 @@ proc load_molecule {type filename} {
         mol new $filename type $type
     } else {
         puts "Error: File $filename does not exist."
+        exit 1
     }
 }
+puts "__________________________"
 
 # Replace "your_file.gro" with your actual filename
 load_molecule gro $structure
