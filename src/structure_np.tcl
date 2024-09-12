@@ -174,11 +174,11 @@ proc load_molecule {type filename} {
 }
 puts "__________________________"
 
-# Replace "your_file.gro" with your actual filename
+Replace "your_file.gro" with your actual filename
 load_molecule gro $structure
 delete_all_reps
 visualize_system_face_cut
-render_image "structure_100Oda.png"
+render_image "structure_15Oda.png"
 
 delete_all_reps
 mol delete all
@@ -235,11 +235,24 @@ mol delete all
 load_molecule pdb "ODAp.pdb"
 delete_all_reps
 visualize_oda
+render_image "odap.png"
+
+mol delete all
+
+load_molecule pdb "ODA.pdb"
+delete_all_reps
+visualize_oda
 render_image "oda.png"
+
+load_molecule pdb "aminopropyl_plus.pdb"
+delete_all_reps
+visualize_aminopropyl
+render_image "aminopropyl_plus.png"
+
+mol delete all
 
 load_molecule pdb "aminopropyl.pdb"
 delete_all_reps
 visualize_aminopropyl
 render_image "aminopropyl.png"
-
 exit
