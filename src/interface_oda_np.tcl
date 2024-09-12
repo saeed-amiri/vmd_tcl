@@ -2,7 +2,7 @@
 package require pbctools
 set env(VMDOPTIXWRITEALPHA) 1
 source /scratch/saeed/MyScripts/vmd_tcl/src/display_procs.tcl
-# mol delete all
+
 
 # Define a procedure to load a molecule
 proc load_molecule {style filename} {
@@ -11,6 +11,7 @@ proc load_molecule {style filename} {
     # Load the molecule
     set mol [mol load $style $filename]
 }
+
 
 # Define a procedure to delete all representations
 proc delete_all_reps {} {
@@ -23,11 +24,13 @@ proc delete_all_reps {} {
     }
 }
 
+
 # Define a procedure to render an image
 proc render_image {filename} {
     display resize 4800 4800
     render TachyonLOptiXInternal $filename
 }
+
 
 proc reset_view_and_display {} {
     display resetview
@@ -40,7 +43,7 @@ proc reset_view_and_display {} {
     light 3 off
     light 4 off
 }
-#
+
 
 proc visualize_system_face_cut {} {
     # Selecting water molecules
@@ -92,7 +95,7 @@ proc visualize_system_np_cut {} {
 
 # rotation for the visulization of the interface
 proc rotate_interface {} {
-       rotate z by -65
+    rotate z by -65
     rotate y by 0
     rotate x by -85
 
@@ -106,9 +109,11 @@ set structure [lindex $argv 0]
 puts $structure
 load_molecule gro $structure
 puts "__________________________"
+
 delete_all_reps
 visualize_system_np_cut
 render_image "interface_top.png"
+
 delete_all_reps
 visualize_system_face_cut
 rotate_interface
