@@ -41,6 +41,10 @@ proc reset_view_and_display {} {
     light 4 off
 }
 
+proc white_background {} {
+    color Display Background white
+}
+
 # Define a procedure with parameters
 proc visualize_residues {repIndex selection radius} {
     # Add a new representation with the specified selection
@@ -55,4 +59,9 @@ proc rotate_view {anglex angley anglez} {
     rotate x by $anglex
     rotate y by $angley
     rotate z by $anglez
+}
+
+# Define a procedure to add periodic boundary conditions
+proc add_pbc {color width} {
+    pbc box -color $color -width $width -material Opaque
 }
