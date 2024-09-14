@@ -15,18 +15,19 @@ proc puts_decorated {text} {
 
 proc load_molecule {type filename} {
     if {[file exists $filename]} {
-        mol new $filename type $type type gro first 0 last -1 step 1 waitfor 1 volsets 0
+        mol new $filename type $type type pqr 
     } else {
         puts "Error: File $filename does not exist."
     }
 }
-
 # reset_view_and_display
-set structure [lindex $argv 0]
-set potential [lindex $argv 1]
+# set structure [lindex $argv 0]
+set structure /scratch/saeed/GÖHBP/PRE_DFG_7May24/single_np/15Oda/electrostatic_potential_3d_vmd/ran_abps_nonlinear/apt_cor_0.pqr
+set potential /scratch/saeed/GÖHBP/PRE_DFG_7May24/single_np/15Oda/electrostatic_potential_3d_vmd/ran_abps_nonlinear/average_potential.dx
+# set potential [lindex $argv 1]
 puts_decorated "Structure: $structure, Potential: $potential"
 
-set mol_i [load_molecule gro $structure]
+set mol_i [load_molecule pqr $structure]
 puts_decorated "Molecule ID: $mol_i"
 mol addfile $potential type dx first 0 last -1 step 1 waitfor 1 volsets 0 $mol_i
 
@@ -36,12 +37,12 @@ mol modcolor 0 0 "ColorID 24"
 # modmaterial rep_number molecule_number material_name
 mol modmaterial 0 0 MetalicPlastic
 # modstyle rep_number molecule_number style_name
-mol modstyle 0 0 "Isosurface 17.3400000 0 0 0 1 1"
+mol modstyle 0 0 "Isosurface 2.95 0 0 0 1 1"
 # addrep molecule_number
 mol addrep 0
 mol modcolor 1 0 "ColorID 1"
 mol modmaterial 1 0 MetalicPlastic
-mol modstyle 1 0 "Isosurface -17.340000 0 0 0 1 1"
+mol modstyle 1 0 "Isosurface 2.95 0 0 0 1 1"
 
 render_image "isosurface000.png"
 rotate_view 90 90 90
