@@ -47,7 +47,7 @@ proc reset_view_and_display {} {
 
 proc visualize_system_face_cut {} {
     # Selecting water molecules
-    visualize_residues 0 {resname SOL and z < 138 and z > 130} 2.0
+    visualize_residues 0 {resname SOL} .5
     # Selecting core of the nanoparticle
     visualize_residues 1 {resname COR} 2.0
     ## Selecting aptes of the nanoparticle with the NH3 atoms hidden
@@ -62,9 +62,9 @@ proc visualize_system_face_cut {} {
     mol modcolor 5 top "ColorID 3"
 
     reset_view_and_display
-
-    pbc box
-    pbc box -width 6 -color black
+    pbc box -off
+    # pbc box
+    # pbc box -width 6 -color black
 
 }
 
