@@ -33,12 +33,12 @@ proc visualize_system_face_cut {} {
     visualize_residues 0 {resname SOL} .5
     mol modstyle 0 0 QuickSurf 1.200000 0.500000 1.000000 1.000000
     mol modcolor 0 0 ColorID 15
-    color change rgb 15 iceblue 0.540000 0.850000 0.999000
+    color change rgb 15 0.540000 0.850000 0.999000
     mol modmaterial 0 0 Transparent
-    material change opacity Transparent 0.10000
+    material change opacity Transparent 0.30000
     display rendermode GLSL
     display depthcue off
-    display projection Perspective
+    display height 5.00
     # Selecting core of the nanoparticle
     visualize_residues 1 {resname COR} 2.0
     ## Selecting aptes of the nanoparticle with the NH3 atoms hidden
@@ -63,15 +63,16 @@ proc visualize_system_face_cut {} {
 
 proc visualize_system_np_cut {} {
     # Selecting water molecules
-    visualize_residues 0 {resname SOL and z < 138 and z > 130} 1.0
+    visualize_residues 0 {resname SOL and z < 138 and z > 130} .5
     mol modstyle 0 0 QuickSurf 1.200000 0.500000 1.000000 1.000000
     mol modcolor 0 0 ColorID 15
-    color change rgb 15 iceblue 0.540000 0.850000 0.999000
+    color change rgb 15 0.540000 0.850000 0.999000
     mol modmaterial 0 0 Transparent
+    material change opacity Transparent 0.30000
+    display projection Perspective
     display rendermode GLSL
     display depthcue off
-    display projection Perspective
-    material change opacity RTChrome 0.05
+    display height 5.00
     # Selecting core of the nanoparticle
     visualize_residues 1 {resname COR and z > 130} 2.0
     ## Selecting aptes of the nanoparticle with the NH3 atoms hidden
