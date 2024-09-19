@@ -43,7 +43,6 @@ proc visualize_system_face_cut {} {
     mol modmaterial 0 0 Transparent
     material change opacity Transparent 0.30000
     display rendermode GLSL
-    display depthcue off
     display height 5.00
     # Selecting core of the nanoparticle
     visualize_residues 1 {resname COR} 2.0
@@ -64,6 +63,7 @@ proc visualize_system_face_cut {} {
     visualize_residues 8 "name POT" 3.0
     mol modcolor 8 top "ColorID 30"
     reset_view_and_display
+    display depthcue off
 }
 
 
@@ -77,7 +77,6 @@ proc visualize_system_np_cut {} {
     material change opacity Transparent 0.30000
     display projection Perspective
     display rendermode GLSL
-    display depthcue off
     display height 5.00
     # Selecting core of the nanoparticle
     visualize_residues 1 {resname COR and z > 130} 2.0
@@ -94,6 +93,7 @@ proc visualize_system_np_cut {} {
     visualize_residues 6 "name NH2" 4.0
     mol modcolor 6 top "ColorID 3"
     reset_view_and_display
+    display depthcue off
 
     pbc box
     pbc box -width 6 -color black
