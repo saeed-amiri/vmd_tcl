@@ -141,3 +141,48 @@ proc visualize_system_box {} {
     pbc box -width 6 -color black
     rotate_box
 }
+
+proc visualize_edl_structure {} {
+    # Selecting water molecules
+    visualize_residues 0 "resname SOL" 2.0
+    # Selecting core of the nanoparticle
+    visualize_residues 1 "resname COR" 3.0
+    # Selecting aptes of the nanoparticle with the NH3 atoms hidden
+    visualize_residues 2 "resname APT and not name N" 2.0
+    mol modcolor 2 top "ColorID 2"
+    # Selecting the NH3 atoms of the aptes
+    visualize_residues 3 {name N} 3.0
+    mol modcolor 3 top "ColorID 0"
+    # Selecting the CL ions
+    visualize_residues 4 "resname CLA" 3.0
+    mol modcolor 4 top "ColorID 7"
+    # Selecting the NA ions
+    visualize_residues 5 "resname POT" 4.0
+    mol modcolor 5 top "ColorID 30"
+    # Selecting the ODA surfactants with the NH2 atoms hidden
+    visualize_residues 6 {name "HA.*"} 2.0
+    mol modcolor 6 top "ColorID 8"
+    visualize_residues 7 "resname ODN and z>90 and not name NH2" 2.0
+    mol modcolor 7 top "ColorID 2"
+    # Selecting the NH2 atoms of the ODA surfactants
+    visualize_residues 8 "name NH2 and z > 90" 4.0
+    mol modcolor 8 top "ColorID 3"
+    # Selecting oil molecules
+    visualize_residues 9 "resname D10" 2.0
+    mol modcolor 9 top "ColorID 4"
+    mol modmaterial 9 top Transparent
+    material change opacity Transparent 0.30000
+    mol modstyle 9 top QuickSurf 3.00000 11.800000 1.000000 3.00000
+    display rendermode GLSL
+    # Reset the view
+    reset_view_and_display
+    display depthcue off
+
+    # Rotate the view
+    rotate_box
+
+    scale by 1.33
+    pbc box
+    pbc box -width 6 -color black
+
+}
