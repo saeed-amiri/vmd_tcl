@@ -28,6 +28,12 @@ proc delete_all_reps {} {
 }
 
 
+proc rotate_box {} {
+    rotate_view 0 0 -65
+    rotate_view -85 0 0
+}
+
+
 proc visualize_system_face_cut {} {
     # Selecting water molecules
     visualize_residues 0 {resname SOL} .5
