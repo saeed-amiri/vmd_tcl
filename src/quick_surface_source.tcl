@@ -192,7 +192,8 @@ proc rotate_clip {} {
 }
 proc visualize_system_clip {} {
     # Selecting water molecules
-    visualize_residues 0 {resname SOL and z < 125} .5
+    pbc wrap -all -compound fragment -center com -centersel "resname COR"
+    visualize_residues 0 {resname SOL and z < 150} .5
     mol selupdate 0 0 1
     mol modstyle 0 0 QuickSurf 1.200000 0.500000 1.000000 1.000000
     mol modcolor 0 0 ColorID 15
@@ -221,10 +222,10 @@ proc visualize_system_clip {} {
     visualize_residues 6 "name NH2" 4.0
     mol smoothrep 0 6 3
     mol modcolor 6 top "ColorID 3"
-    visualize_residues 7 "name CLA and z < 125" 3.0
+    visualize_residues 7 "name CLA and z < 150" 3.0
     mol smoothrep 0 7 3
     mol modcolor 7 top "ColorID 7"
-    visualize_residues 8 "name POT and z < 125" 3.0
+    visualize_residues 8 "name POT and z < 150" 3.0
     mol smoothrep 0 8 3
     mol modcolor 8 top "ColorID 30"
     reset_view_and_display
