@@ -233,3 +233,13 @@ proc visualize_system_clip {} {
     color Display Background white
 
 }
+
+proc np_alone {} {
+    # Selecting core of the nanoparticle
+    visualize_residues 0 {resname COR} 2.0
+    mol smoothrep 0 0 3
+    ## Selecting aptes of the nanoparticle with the NH3 atoms hidden
+    visualize_residues 1 {resname APT and not name N} 2.0
+    mol smoothrep 0 1 3
+    mol modcolor 1 top "ColorID 2"
+}
