@@ -243,3 +243,13 @@ proc np_alone {} {
     mol smoothrep 0 1 3
     mol modcolor 1 top "ColorID 2"
 }
+proc set_transparent {} {
+material change ambient      Transparent 0.000000
+material change diffuse      Transparent 0.850000
+material change specular     Transparent 0.500000
+material change shininess    Transparent 0.530000
+material change mirror       Transparent 0.000000
+material change opacity      Transparent 0.200000
+material change outline      Transparent 2.000000
+material change outlinewidth Transparent 0.340000
+}
