@@ -65,3 +65,7 @@ proc rotate_view {anglex angley anglez} {
 proc add_pbc {color width} {
     pbc box -color $color -width $width -material Opaque
 }
+
+proc remove_pbc {} {
+    pbc box -off
+}
