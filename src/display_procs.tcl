@@ -51,7 +51,7 @@ proc visualize_residues {repIndex selection radius} {
     mol addrep top
     mol modselect $repIndex top $selection
     mol modstyle $repIndex top "CPK $radius 0.0 30.0 12.0"
-    mol modmaterial $repIndex top Glassy
+    mol modmaterial $repIndex top Glossy
 }
 
 # Define a procedure to rotate the molecule
