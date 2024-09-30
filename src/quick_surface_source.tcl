@@ -231,7 +231,56 @@ proc visualize_system_clip {} {
     reset_view_and_display
     display depthcue off
     color Display Background white
+}
 
+proc visualize_system_sink {} {
+    # Selecting water molecules
+    pbc wrap -all -compound fragment -center com -centersel "resname COR"
+    visualize_residues 0 {resname SOL and z < 150} .5
+    mol selupdate 0 0 1
+    mol modstyle 0 0 QuickSurf 1.200000 0.500000 1.000000 1.000000
+    mol modcolor 0 0 ColorID 15
+    color change rgb 15 0.540000 0.850000 0.999000
+    mol modmaterial 0 0 Transparent
+    material change opacity Transparent 0.30000
+    display rendermode GLSL
+    display height 5.00
+    # Selecting core of the nanoparticle
+    visualize_residues 1 {resname COR} 2.0
+    mol smoothrep 0 1 3
+    
+    ## Selecting aptes of the nanoparticle with the NH3 atoms hidden
+    visualize_residues 2 {resname APT and not name N} 2.0
+    mol smoothrep 0 2 3
+    mol modcolor 2 top "ColorID 2"
+    visualize_residues 3 {resname ODN and z>97 and name "C.*" and x < 120 } 3
+    mol smoothrep 0 3 3
+    mol modcolor 3 top "ColorID 2"
+    visualize_residues 4 {name N and x < 120} 3.0
+    mol smoothrep 0 4 3
+    mol modcolor 4 top "ColorID 0"
+    ## Selecting the NH2 atoms of the ODA surfactants
+    visualize_residues 5 {resname ODA and name "H.*" and x < 120} 2.3
+    mol smoothrep 0 5 3
+    mol modcolor 5 top "ColorID 8"
+    visualize_residues 6 "name NH2 and x < 120" 4.0
+    mol smoothrep 0 6 3
+    mol modcolor 6 top "ColorID 3"
+    visualize_residues 7 "name CLA and z < 150" 3.0
+    mol smoothrep 0 7 3
+    mol modcolor 7 top "ColorID 7"
+    color change rgb 7 0.000000 0.666667 0.000000
+    visualize_residues 8 "name POT and z < 150" 3.0
+    mol smoothrep 0 8 3
+    mol modcolor 8 top "ColorID 30"
+    visualize_residues 9 "resname D10 and z > 90 and x < 120" 0.50
+    mol modcolor 9 top "ColorID 4"
+    mol modstyle 9 top QuickSurf 1.200000 0.500000 1.000000 1.000000
+    mol modmaterial 9 top Transparent
+    reset_view_and_display
+    display depthcue off
+    color Display Background white
+    rotate_view -90 0 0
 }
 
 proc np_alone {} {
