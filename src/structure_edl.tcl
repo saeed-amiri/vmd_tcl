@@ -34,9 +34,13 @@ proc visualize_system_face_cut {} {
     # Selecting oil molecules
     visualize_residues 9 "resname D10" 2.0
     mol modcolor 9 top "ColorID 4"
-    # visualize_residues 10 "resname APT and 'HA.*'" 2.0
-    # mol modcolor 10 top "ColorID 2"
-
+    mol modstyle 9 top QuickSurf 1.200000 0.500000 1.000000 1.000000
+    mol modmaterial 9 top Transparent
+    material change opacity Transparent 0.40000
+    mol modmaterial 9 top Transparent
+    material change opacity Transparent 0.40000
+    display rendermode GLSL
+    display depthcue off
     # Reset the view
     reset_view_and_display
 
